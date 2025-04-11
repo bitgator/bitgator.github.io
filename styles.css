@@ -2,14 +2,16 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-body: {
-  background-color: lightgrey;
-  color: blue;
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 20px;
+    padding: 20px;
 }
-
-h1: {
+h1 {
+    color: #0056b3;
+    font-weight: 600;
 }
-
-h2: {
-  color: darkgrey;
+h2 {
+    color: #666;
+    font-weight: 400;
 }
