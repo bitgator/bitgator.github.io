@@ -1,7 +1,10 @@
+:root {
+  font-family: 'Open Sans', sans-serif;
+}
+
 body: {
   background-color: lightgrey;
   color: blue;
-  font-family: 'Open Sans';
 }
 
 h1: {
