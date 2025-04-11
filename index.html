@@ -9,23 +9,8 @@
         <!-- Make sure the path to your styles.css is correct -->
         <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" href="https://devcdn.chatstyle.ai/chatbox/chatstyleai.css">
-        <style>
-            /* Backup inline styles in case the external stylesheet isn't loading */
-            body {
-                font-family: 'Open Sans', sans-serif;
-                margin: 20px;
-                padding: 20px;
-            }
-            h1 {
-                color: #0056b3;
-                font-weight: 600;
-            }
-            h2 {
-                color: #666;
-                font-weight: 400;
-            }
-        </style>
     </head>
+    
     <body>
         <h1>BLUEFOX Technology Partners</h1>
         <h2>Just testing things out here</h2>
@@ -33,24 +18,11 @@
         <!-- Load the script before using the custom element -->
         <script src="https://devcdn.chatstyle.ai/chatbox/chatstyleai.js"></script>
         
-        <!-- Make sure the attributes are properly formatted -->
         <chatstyleai-chatbox 
             id="chatbox" 
             channel="3c89b1a2-d9b0-4418-a820-73a0a6bf1f89" 
             version="" 
             options='{"env":"dev", "isOpen":false, "autoStart":true}'>
         </chatstyleai-chatbox>
-        
-        <script>
-            // Check if the element is properly loaded
-            document.addEventListener('DOMContentLoaded', () => {
-                const chatbox = document.getElementById('chatbox');
-                if (chatbox) {
-                    console.log('ChatStyle element found');
-                } else {
-                    console.error('ChatStyle element not found');
-                }
-            });
-        </script>
     </body>
 </html>
