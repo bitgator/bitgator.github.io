@@ -464,53 +464,56 @@
 
   <!-- ─── CONTEXTPM ─── -->
   <section id="contextpm">
-    <div class="section-label">Side project — solo build</div>
+    <div class="section-label">Side project — solo build · dogfooding it on its own roadmap</div>
     <h2>ContextPM</h2>
-    <p class="subtitle">An AI-powered product management tool that embeds intelligence into the workflow where product decisions actually happen.</p>
+    <p class="subtitle">AI-powered product management — from raw feedback to development-ready stories.</p>
 
     <ul class="problem-list">
-      <li>Discovery generates signals, not stories</li>
-      <li>AI belongs in the pipeline, not bolted on</li>
-      <li>Human judgment and AI execution need separate contracts</li>
-      <li>Batch processing over interactive chatbots</li>
+      <li>Teams collect feedback from dozens of sources but can't synthesize it</li>
+      <li>AI belongs in the pipeline, not bolted on as a chatbot</li>
+      <li>Every stage transition should be a deliberate PM decision</li>
+      <li>The system should never auto-promote</li>
     </ul>
 
     <div class="prose">
-      <p>Most AI-in-product-management tools treat the LLM as a chatbot sitting next to your backlog. I'm building something different: ContextPM embeds AI directly into the product decision pipeline, from raw discovery signals through to execution-ready specifications.</p>
-      <p>The core workflow follows a deliberate progression: <strong>Discovery → Recommendation → Idea → Story</strong>. Each stage has a distinct job. Discovery captures product signals — support tickets, sales call themes, competitive shifts. AI processes these in batch, not interactively, extracting patterns and surfacing recommendations that a product leader can evaluate against strategy and context.</p>
-      <p>The key architectural insight is what I call the <strong>two-layer model</strong>. The human-readable layer — the user story — serves the decision layer. It's written for product managers, designers, and stakeholders who need to understand <em>what</em> we're building and <em>why</em>. Below that, AI generates a BDD specification that serves as the downstream execution contract for engineering and QA. Same intent, two audiences, each getting exactly what they need.</p>
+      <p>Most AI-in-product-management tools treat the LLM as a chatbot sitting next to your backlog. ContextPM does something different: it models the full PM workflow as a four-stage pipeline with explicit status cycles, clear ownership, and defined handoffs. Feedback flows in from connectors — Zendesk, Aha!, manual entry. AI clusters and synthesizes it into recommendations. PMs curate those into ideas. Validated ideas become development stories.</p>
+      <p>The critical design rule: <strong>the system never auto-promotes.</strong> Every stage transition is a deliberate PM decision. AI handles synthesis and structure; humans handle judgment and prioritization. This isn't a philosophical position — it's a direct response to watching teams lose control when AI tools start making decisions on their behalf.</p>
     </div>
 
     <div class="pipeline">
       <div class="pipeline-step">
         <div class="pipeline-letter">D</div>
         <div class="pipeline-title">Discovery</div>
-        <div class="pipeline-desc">Signals from tickets, calls, market</div>
+        <div class="pipeline-desc">Signals from Zendesk, Aha!, manual entry via connectors</div>
         <span class="pipeline-arrow">›</span>
       </div>
       <div class="pipeline-step">
         <div class="pipeline-letter">R</div>
         <div class="pipeline-title">Recommendation</div>
-        <div class="pipeline-desc">AI-surfaced patterns & opportunities</div>
+        <div class="pipeline-desc">Three-pass AI pipeline: cluster, consolidate, compute impact</div>
         <span class="pipeline-arrow">›</span>
       </div>
       <div class="pipeline-step">
         <div class="pipeline-letter">I</div>
         <div class="pipeline-title">Idea</div>
-        <div class="pipeline-desc">Product leader shapes the concept</div>
+        <div class="pipeline-desc">PM-curated brief with problem, solution, stakeholder questions</div>
         <span class="pipeline-arrow">›</span>
       </div>
       <div class="pipeline-step">
         <div class="pipeline-letter">S</div>
         <div class="pipeline-title">Story</div>
-        <div class="pipeline-desc">Decision layer + execution contract</div>
+        <div class="pipeline-desc">End-state title, use cases grounded in real feedback</div>
       </div>
+    </div>
+
+    <div class="prose">
+      <p>Stories are opinionated by design. The title is framed as an end state — <strong>"Partners can X"</strong> not "Create X feature." Each story includes an As a/I want/So that statement, assumptions, open questions, and use cases pulled from the actual feedback that spawned it. PMs can add notes and regenerate iteratively — the AI drafts, the human refines.</p>
     </div>
 
     <div class="card-pair">
       <div class="card">
         <h4>Human-Readable Story</h4>
-        <p>Structured narrative with problem context, solution framing, and use cases. Written for humans to evaluate, debate, and prioritize.</p>
+        <p>Structured narrative with problem context, solution framing, and use cases grounded in real customer feedback. Written for humans to evaluate, debate, and prioritize.</p>
         <div class="audience">Audience → PM, Design, Stakeholders</div>
       </div>
       <div class="card">
@@ -526,14 +529,27 @@
 
     <div class="insights">
       <div class="insight">
-        <div class="card-label">Product thinking</div>
-        <h3>Batch over chat</h3>
-        <p>AI processes discovery signals asynchronously in batch — not as an interactive chatbot. This reflects how product work actually happens: you don't make one decision at a time, you pattern-match across dozens of inputs.</p>
+        <div class="card-label">Architecture decision</div>
+        <h3>Step Functions over browser execution</h3>
+        <p>The three-pass recommendation pipeline can take minutes across hundreds of feedback items. Browser-based execution dies on navigation, laptop sleep, or network interruption. AWS Step Functions survive all of these, provide native retry with backoff, and produce a durable execution log. Worth the complexity for reliability.</p>
       </div>
       <div class="insight">
-        <div class="card-label">Architecture decision</div>
+        <div class="card-label">Product decision</div>
+        <h3>Preservation-based reprocessing</h3>
+        <p>When rerunning recommendation generation, starred and promoted recommendations survive — everything else is deleted and regenerated. PMs invest real effort curating recommendations. A full rerun shouldn't destroy that work, but non-curated output should be regenerable as new feedback arrives.</p>
+      </div>
+    </div>
+
+    <div class="insights" style="margin-top: 1rem;">
+      <div class="insight">
+        <div class="card-label">Constraint as feature</div>
+        <h3>Mantine with zero custom CSS</h3>
+        <p>All styling uses Mantine component props and theme tokens. No CSS modules, no styled-components, no inline pixel values. This eliminates an entire category of tech debt — every spacing value, color, and typography choice flows through the theme, making visual consistency automatic and redesigns mechanical.</p>
+      </div>
+      <div class="insight">
+        <div class="card-label">Stack</div>
         <h3>Solo builder, full stack</h3>
-        <p>React, TypeScript, Mantine UI, AWS Amplify. Built end-to-end by one person — not because a team wasn't needed, but to prove the concept and discover the product before investing in a team.</p>
+        <p>React 19, TypeScript, Mantine v8, AWS Amplify Gen 2, DynamoDB, AppSync GraphQL, Step Functions, Lambda. Built end-to-end by one person to prove the concept and discover the product before investing in a team. Currently dogfooding it on its own roadmap.</p>
       </div>
     </div>
   </section>
