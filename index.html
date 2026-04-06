@@ -423,10 +423,10 @@
   <div class="nav-inner">
     <a href="#" class="nav-name">David Falkenberg</a>
     <ul class="nav-links">
+      <li><a href="#essay">On AI &amp; teams</a></li>
       <li><a href="#contextpm">ContextPM</a></li>
       <li><a href="#native">Native platforms</a></li>
       <li><a href="#chatai">AI architecture</a></li>
-      <li><a href="#essay">On AI &amp; teams</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -461,6 +461,34 @@
       </div>
     </dl>
   </header>
+
+</div><!-- break out of container for essay background -->
+
+<!-- ─── ESSAY ─── -->
+<section id="essay">
+  <div class="essay-section">
+    <div class="container">
+      <div class="section-label">Essay</div>
+      <h2>On Scaling AI-Enabled Development</h2>
+      <p class="subtitle">Vibe-coding works beautifully for solo builders. It breaks down the moment you add a second person to the room.</p>
+
+      <div class="prose">
+        <p>When I'm building alone — ContextPM, for example — AI-assisted development is transformative. I can move from idea to working code in hours. The feedback loop is tight: I hold the full context, I make every tradeoff, and the AI accelerates execution without introducing coordination overhead. This is what people mean by "vibe-coding," and for solo builders, it's genuinely powerful.</p>
+        <p>But scale that to a cross-functional team and the model fractures. The reason isn't technical — it's that everyone on the team knows different things. A product manager, a designer, a QA engineer, and a backend developer each hold different domain expertise. They see different risks, apply different quality bars, and optimize for different outcomes. When a solo builder uses AI, all of that expertise is collapsed into one person's judgment. On a team, it's distributed — and AI doesn't know how to navigate the distribution.</p>
+
+        <h3>The judgment distribution problem</h3>
+        <p>An AI coding assistant that writes a feature for a solo founder is operating in a context where one person defines "done." On a team, "done" is a negotiation between the PM who scoped it, the designer who shaped the interaction, the engineer who'll maintain it, and the QA lead who'll break it. AI-generated code that passes one person's bar may violate three others' constraints — constraints the AI was never given.</p>
+        <p>I've spent four months unwinding poor decisions made with AI assistance on a team. Not because the AI was wrong, but because it was right <em>within one person's context</em> and wrong within the team's. The code compiled. The tests passed. The architecture was a dead end that only became visible when someone from a different discipline looked at it.</p>
+
+        <h3>What actually works</h3>
+        <p>The answer isn't restricting AI — it's encoding the team's domain expertise into the workflow before AI gets involved. This means explicit specification layers that capture not just requirements but constraints from each discipline. It means treating AI-generated output as a draft that requires cross-functional review, not a finished artifact. And it means building systems — like ContextPM's two-layer model — where the human decision layer and the AI execution layer have separate contracts with separate audiences.</p>
+        <p>The product leaders who will thrive in AI-enabled organizations aren't the ones who code the fastest with Copilot. They're the ones who design the systems that bring every discipline's judgment into the AI-assisted workflow — without losing speed, without losing quality, and without losing the human expertise that makes the product worth building.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
 
   <!-- ─── CONTEXTPM ─── -->
   <section id="contextpm">
@@ -625,30 +653,6 @@
   </section>
 
 </div><!-- end .container -->
-
-<!-- ─── ESSAY ─── -->
-<section id="essay">
-  <div class="essay-section">
-    <div class="container">
-      <div class="section-label">Essay</div>
-      <h2>On Scaling AI-Enabled Development</h2>
-      <p class="subtitle">Vibe-coding works beautifully for solo builders. It breaks down the moment you add a second person to the room.</p>
-
-      <div class="prose">
-        <p>When I'm building alone — ContextPM, for example — AI-assisted development is transformative. I can move from idea to working code in hours. The feedback loop is tight: I hold the full context, I make every tradeoff, and the AI accelerates execution without introducing coordination overhead. This is what people mean by "vibe-coding," and for solo builders, it's genuinely powerful.</p>
-        <p>But scale that to a cross-functional team and the model fractures. The reason isn't technical — it's that everyone on the team knows different things. A product manager, a designer, a QA engineer, and a backend developer each hold different domain expertise. They see different risks, apply different quality bars, and optimize for different outcomes. When a solo builder uses AI, all of that expertise is collapsed into one person's judgment. On a team, it's distributed — and AI doesn't know how to navigate the distribution.</p>
-
-        <h3>The judgment distribution problem</h3>
-        <p>An AI coding assistant that writes a feature for a solo founder is operating in a context where one person defines "done." On a team, "done" is a negotiation between the PM who scoped it, the designer who shaped the interaction, the engineer who'll maintain it, and the QA lead who'll break it. AI-generated code that passes one person's bar may violate three others' constraints — constraints the AI was never given.</p>
-        <p>I've spent four months unwinding poor decisions made with AI assistance on a team. Not because the AI was wrong, but because it was right <em>within one person's context</em> and wrong within the team's. The code compiled. The tests passed. The architecture was a dead end that only became visible when someone from a different discipline looked at it.</p>
-
-        <h3>What actually works</h3>
-        <p>The answer isn't restricting AI — it's encoding the team's domain expertise into the workflow before AI gets involved. This means explicit specification layers that capture not just requirements but constraints from each discipline. It means treating AI-generated output as a draft that requires cross-functional review, not a finished artifact. And it means building systems — like ContextPM's two-layer model — where the human decision layer and the AI execution layer have separate contracts with separate audiences.</p>
-        <p>The product leaders who will thrive in AI-enabled organizations aren't the ones who code the fastest with Copilot. They're the ones who design the systems that bring every discipline's judgment into the AI-assisted workflow — without losing speed, without losing quality, and without losing the human expertise that makes the product worth building.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <div class="container">
 
