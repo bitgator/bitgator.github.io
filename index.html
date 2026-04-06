@@ -210,50 +210,64 @@
     color: var(--text-secondary);
   }
 
-  /* ─── PIPELINE ─── */
-  .pipeline {
-    display: flex;
-    align-items: stretch;
-    gap: 0;
+  /* ─── TWO-LAYER PIPELINE ─── */
+  .pipeline-two-layer {
     margin: 2rem 0;
-    background: var(--card-bg);
     border: 1px solid var(--rule);
     border-radius: 4px;
     overflow: hidden;
   }
-  .pipeline-step {
-    flex: 1;
-    padding: 1.2rem 1rem;
+  .pipeline-row {
+    display: grid;
+    grid-template-columns: 72px 1fr 1fr 1fr 1fr;
+    gap: 0;
+  }
+  .pipeline-human {
+    background: var(--card-bg);
+    border-bottom: 2px solid var(--rule);
+  }
+  .pipeline-ai {
+    background: color-mix(in srgb, var(--accent) 6%, var(--bg));
+  }
+  .pipeline-row-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 1rem 0.5rem;
     border-right: 1px solid var(--rule-light);
-    position: relative;
   }
-  .pipeline-step:last-child { border-right: none; }
-  .pipeline-letter {
+  .pipeline-human .pipeline-row-label { color: var(--text-secondary); }
+  .pipeline-ai .pipeline-row-label { color: var(--accent); }
+  .pipeline-cell {
+    padding: 1rem 1rem;
+    border-right: 1px solid var(--rule-light);
+  }
+  .pipeline-cell:last-child { border-right: none; }
+  .pipeline-stage {
     font-family: 'Bitter', serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--accent);
-    margin-bottom: 0.3rem;
-  }
-  .pipeline-title {
     font-weight: 600;
-    font-size: 0.82rem;
+    font-size: 0.88rem;
     color: var(--text);
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.2rem;
   }
-  .pipeline-desc {
-    font-size: 0.75rem;
+  .pipeline-ai .pipeline-stage { color: var(--accent); }
+  .pipeline-detail {
+    font-size: 0.78rem;
     color: var(--text-tertiary);
     line-height: 1.45;
   }
-  .pipeline-arrow {
-    position: absolute;
-    right: -6px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--rule);
-    font-size: 0.9rem;
-    z-index: 2;
+  .pipeline-cell-empty {
+    display: flex;
+    align-items: center;
+    opacity: 0.4;
+  }
+  .pipeline-cell-empty .pipeline-detail {
+    font-size: 1rem;
   }
 
   /* ─── TWO COLUMN CARDS ─── */
@@ -406,6 +420,16 @@
     .pipeline-arrow { display: none; }
     .card-pair { grid-template-columns: 1fr; }
     .insights { grid-template-columns: 1fr; }
+    .pipeline-row { grid-template-columns: 1fr; }
+    .pipeline-row-label {
+      justify-content: flex-start;
+      padding: 0.6rem 1rem 0.3rem;
+      border-right: none;
+      border-bottom: none;
+    }
+    .pipeline-cell { border-right: none; border-bottom: 1px solid var(--rule-light); }
+    .pipeline-cell:last-child { border-bottom: none; }
+    .pipeline-cell-empty { display: none; }
     .essay-section { margin: 0 -2rem; padding: 2.5rem 2rem; }
   }
 
@@ -508,29 +532,43 @@
       <p>The critical design rule: <strong>the system never auto-promotes.</strong> Every stage transition is a deliberate PM decision. AI handles synthesis and structure; humans handle judgment and prioritization. This isn't a philosophical position — it's a direct response to watching teams lose control when AI tools start making decisions on their behalf.</p>
     </div>
 
-    <div class="pipeline">
-      <div class="pipeline-step">
-        <div class="pipeline-letter">D</div>
-        <div class="pipeline-title">Discovery</div>
-        <div class="pipeline-desc">Signals from Zendesk, Aha!, manual entry via connectors</div>
-        <span class="pipeline-arrow">›</span>
+    <div class="pipeline-two-layer">
+      <div class="pipeline-row pipeline-human">
+        <div class="pipeline-row-label">Human</div>
+        <div class="pipeline-cell">
+          <div class="pipeline-stage">Feedback</div>
+          <div class="pipeline-detail">Captures signals from support, sales, market via connectors</div>
+        </div>
+        <div class="pipeline-cell">
+          <div class="pipeline-stage">Curation</div>
+          <div class="pipeline-detail">Reviews recommendations, stars what matters, discards noise</div>
+        </div>
+        <div class="pipeline-cell">
+          <div class="pipeline-stage">Validation</div>
+          <div class="pipeline-detail">Shapes ideas into briefs for stakeholder review — problem, solution, open questions</div>
+        </div>
+        <div class="pipeline-cell">
+          <div class="pipeline-stage">Decision</div>
+          <div class="pipeline-detail">Promotes validated ideas to stories — the deliberate handoff to execution</div>
+        </div>
       </div>
-      <div class="pipeline-step">
-        <div class="pipeline-letter">R</div>
-        <div class="pipeline-title">Recommendation</div>
-        <div class="pipeline-desc">Three-pass AI pipeline: cluster, consolidate, compute impact</div>
-        <span class="pipeline-arrow">›</span>
-      </div>
-      <div class="pipeline-step">
-        <div class="pipeline-letter">I</div>
-        <div class="pipeline-title">Idea</div>
-        <div class="pipeline-desc">PM-curated brief with problem, solution, stakeholder questions</div>
-        <span class="pipeline-arrow">›</span>
-      </div>
-      <div class="pipeline-step">
-        <div class="pipeline-letter">S</div>
-        <div class="pipeline-title">Story</div>
-        <div class="pipeline-desc">End-state title, use cases grounded in real feedback</div>
+      <div class="pipeline-row pipeline-ai">
+        <div class="pipeline-row-label">AI</div>
+        <div class="pipeline-cell pipeline-cell-empty">
+          <div class="pipeline-detail">&mdash;</div>
+        </div>
+        <div class="pipeline-cell">
+          <div class="pipeline-stage">Synthesis</div>
+          <div class="pipeline-detail">Three-pass pipeline: cluster, consolidate, compute impact across hundreds of inputs</div>
+        </div>
+        <div class="pipeline-cell">
+          <div class="pipeline-stage">Drafting</div>
+          <div class="pipeline-detail">Generates and rewrites idea briefs from recommendations — retaining full feedback context</div>
+        </div>
+        <div class="pipeline-cell">
+          <div class="pipeline-stage">Specification</div>
+          <div class="pipeline-detail">Writes stories and BDD specs grounded in all upstream context — PM refines iteratively</div>
+        </div>
       </div>
     </div>
 
